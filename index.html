@@ -40,13 +40,28 @@
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dplayer/1.24.0/DPlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/etng/p2p_hlsaver_plugin@0.5.3/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/etng/p2p_hlsaver_plugin@0.5.4/all.min.js"></script>
 <script type="text/javascript">
+    var qsa = {}
+    location.search.substr(1).split('&').reduce(function(b, c){
+      var tmp = c.split('=', 2);
+      if(tmp[0]){
+        b[tmp[0]] = tmp[1]
+      }
+      return b
+    }, qsa)
+    console.log('qsa', qsa)
+    if (!qsa.debug) {
+      var elStat = document.getElementById('dplayer-stat')
+      if (elStat) {
+        elStat.parentElement.removeChild(elStat)
+      }
+    }
     P2PEngine.dplayer(
       'dplayer', // 容器 id
-      'http://youku.com-i-youku.com/20180916/2317_42ae7b51/index.m3u8', //m3u8地址
-      "http://103.103.51.250:8787",  // tracker服务器地址
-      'ws://103.103.51.250:8181/ws' // 信令服务器地址
+      qsa.url || 'http://youku.com-i-youku.com/20180916/2317_42ae7b51/index.m3u8', //m3u8地址
+      "https://p2p.okzyp2p.com/tracker",  // tracker服务器地址
+      'wss://p2p.okzyp2p.com/wss' // 信令服务器地址
     )
 </script>
 </html>
