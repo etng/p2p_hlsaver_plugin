@@ -57,9 +57,12 @@
         elStat.parentElement.removeChild(elStat)
       }
     }
+    if (qsa.aswx) {
+      window.WeixinJSBridge = 1
+    }
     P2PEngine.dplayer(
       'dplayer', // 容器 id
-      qsa.url || 'http://youku.com-i-youku.com/20180916/2317_42ae7b51/index.m3u8', //m3u8地址
+      qsa.url || 'https://youku.com-i-youku.com/20180916/2317_42ae7b51/index.m3u8', //m3u8地址
       "https://p2p.okzyp2p.com/tracker",  // tracker服务器地址
       'wss://p2p.okzyp2p.com/wss' // 信令服务器地址
     )
